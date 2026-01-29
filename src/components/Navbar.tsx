@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
+import { AnimatedLogo } from './AnimatedLogo';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -44,17 +45,8 @@ export const Navbar = () => {
     >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('#home');
-            }}
-            className="text-2xl font-bold text-primary transition-transform hover:scale-105"
-          >
-            WeScaleForYou
-          </a>
+          {/* Animated 3D Logo */}
+          <AnimatedLogo onClick={() => scrollToSection('#home')} />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
