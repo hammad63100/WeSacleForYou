@@ -166,16 +166,18 @@ const StatItem = ({
 
   return (
     <div
-      className={`text-center p-4 transition-all duration-500 ${
+      className={`flex flex-col items-center transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">
-        {count}
-        {suffix}
+      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-primary/30 bg-card/30 backdrop-blur-sm flex items-center justify-center mb-3 hover:border-primary/60 hover:bg-card/50 transition-all duration-300 hover:scale-105">
+        <span className="text-2xl sm:text-3xl font-bold text-primary">
+          {count}
+          {suffix}
+        </span>
       </div>
-      <div className="text-sm text-muted-foreground">{label}</div>
+      <div className="text-sm text-muted-foreground text-center">{label}</div>
     </div>
   );
 };
