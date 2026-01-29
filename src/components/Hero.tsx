@@ -1,6 +1,8 @@
+import { Suspense } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation, useCounter } from '@/hooks/useScrollAnimation';
+import { HeroBackground3D } from './HeroBackground3D';
 
 const stats = [
   { value: 42, suffix: '%', label: 'Avg. Conversion Increase' },
@@ -23,28 +25,19 @@ export const Hero = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/10" />
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      </div>
+      {/* 3D Animated Background */}
+      <Suspense fallback={null}>
+        <HeroBackground3D />
+      </Suspense>
 
-      {/* Floating Elements */}
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/60 to-background/80" />
+      
+      {/* Glow Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-primary/30 rounded-full animate-bounce"
-            style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + (i % 3) * 20}%`,
-              animationDelay: `${i * 0.2}s`,
-              animationDuration: `${2 + i * 0.5}s`,
-            }}
-          />
-        ))}
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" />
       </div>
 
       <div ref={ref} className="container mx-auto px-4 relative z-10">
