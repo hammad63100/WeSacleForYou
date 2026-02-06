@@ -1,96 +1,78 @@
 import {
-  TrendingUp,
   Target,
   FileText,
-  Monitor,
+  Palette,
+  Rocket,
   Shield,
+  Building2,
   Package,
-  Globe,
-  Headphones,
-  RotateCcw,
-  Search,
-  Camera,
-  BarChart3,
   LucideIcon,
 } from 'lucide-react';
+
+// Import service images
+import amazonPPCImage from '@/assets/Amazon PPC Management.jpeg';
+import listingOptImage from '@/assets/Amazon Listing Optimization.jpeg';
+import aPlusImage from '@/assets/A+ Content & Creatives.jpeg';
+import brandLaunchImage from '@/assets/A-Z Brand Launch.jpeg';
+import tradeMarkImage from '@/assets/Trade Mark Filing.jpeg';
+import llcImage from '@/assets/LLC  Company Creation.jpeg';
+import productSourcingImage from '@/assets/Products Sourcing.jpeg';
 
 export interface Service {
   icon: LucideIcon;
   title: string;
   description: string;
+  image: string;
 }
 
 export const services: Service[] = [
   {
-    icon: TrendingUp,
-    title: 'Growth Planning & Strategy',
-    description:
-      "Whatever your goals, we'll help you achieve them through data-driven planning, precision execution, and forward-thinking growth strategies.",
-  },
-  {
     icon: Target,
-    title: 'PPC Advertising',
+    title: 'Amazon PPC Management',
     description:
-      "Need more sales or stronger profitability? Our Amazon PPC experts use cutting-edge tools and proven methods to optimize campaigns tailored to your brand's goals.",
+      'We manage Amazon PPC campaigns to increase visibility, drive targeted traffic, and improve sales while keeping ad costs under control. Our focus is on data-driven optimization and consistent performance growth.',
+    image: amazonPPCImage,
   },
   {
     icon: FileText,
-    title: 'Product Listing Optimization',
+    title: 'Amazon Listing Optimization',
     description:
-      'We craft high-converting listings that boost rankings, lower ad costs, and turn browsers into loyal customers.',
+      'We optimize your Amazon listings with keyword-rich titles, bullet points, descriptions, and backend search terms to improve rankings, click-through rate, and conversions.',
+    image: listingOptImage,
   },
   {
-    icon: Monitor,
-    title: 'Demand-Side Platform (DSP)',
+    icon: Palette,
+    title: 'A+ Content & Creatives',
     description:
-      "Extend your brand's reach beyond Amazon. Our DSP specialists build programmatic ad campaigns that increase visibility and strengthen brand loyalty across the web.",
+      'We design high-quality A+ Content and creatives that clearly explain your product benefits, build brand trust, and help customers make confident buying decisions.',
+    image: aPlusImage,
+  },
+  {
+    icon: Rocket,
+    title: 'A-Z Brand Launch',
+    description:
+      'From product research to launch strategy, we handle the complete Amazon brand launch process. This includes listing setup, pricing strategy, PPC launch, and initial growth planning.',
+    image: brandLaunchImage,
   },
   {
     icon: Shield,
-    title: 'Amazon Brand Support',
+    title: 'Trade Mark Filing',
     description:
-      'From account health issues to stranded inventory, our Partner Success team handles it all — so your business runs smoothly, 24/7.',
+      'We assist with trademark filing to protect your brand name and logo, helping you secure brand ownership and eligibility for Amazon Brand Registry.',
+    image: tradeMarkImage,
+  },
+  {
+    icon: Building2,
+    title: 'LLC / Company Creation',
+    description:
+      'We provide guidance and support for LLC or company formation, ensuring your business is set up correctly and ready to operate legally and professionally.',
+    image: llcImage,
   },
   {
     icon: Package,
-    title: 'Inventory Management',
+    title: 'Products Sourcing',
     description:
-      'Rest easy knowing your stock levels, forecasts, and restocking timelines are in expert hands with our proven inventory projection systems.',
-  },
-  {
-    icon: Globe,
-    title: 'Google Advertising',
-    description:
-      "Bring shoppers from the world's largest search engine straight to your Amazon listings through targeted, performance-based Google Ads campaigns.",
-  },
-  {
-    icon: Headphones,
-    title: 'Customer Service Management',
-    description:
-      'Reclaim your time while we manage customer messaging, reviews, and buyer feedback with precision and care.',
-  },
-  {
-    icon: RotateCcw,
-    title: 'Lost Inventory Recovery',
-    description:
-      'Our proprietary process tracks down every dollar Amazon owes you, ensuring you recover funds and protect your bottom line.',
-  },
-  {
-    icon: Search,
-    title: 'Amazon SEO',
-    description:
-      'We elevate your organic ranking with keyword-rich, conversion-focused SEO strategies designed to drive traffic and boost sales velocity.',
-  },
-  {
-    icon: Camera,
-    title: 'Product Photography & Video',
-    description:
-      'Make your products shine. Our professional photo and video team creates stunning visuals that stop scrolls and convert clicks into sales.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Customized Reporting',
-    description:
-      'Stay in control with real-time insights. Our custom dashboards and reports give you a clear view of what matters most to your business.',
+      'We help you find reliable suppliers, negotiate pricing, and ensure product quality, so you can source profitable products with confidence and reduced risk.',
+    image: productSourcingImage,
   },
 ];

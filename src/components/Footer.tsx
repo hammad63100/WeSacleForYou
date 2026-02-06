@@ -32,10 +32,24 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { 
+    icon: Facebook, 
+    href: 'https://www.facebook.com/profile.php?id=100003372257229', 
+    label: 'Facebook',
+    color: '#1877F2'
+  },
+  { 
+    icon: Instagram, 
+    href: 'https://www.instagram.com/wescaleforyou?igsh=bWt5NTF0azVuY2F1', 
+    label: 'Instagram',
+    color: '#E4405F'
+  },
+  { 
+    icon: Linkedin, 
+    href: 'https://www.linkedin.com/in/ihtisham-khan-8204412b0/', 
+    label: 'LinkedIn',
+    color: '#0A66C2'
+  },
 ];
 
 export const Footer = () => {
@@ -78,10 +92,12 @@ export const Footer = () => {
                 <a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-muted/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-sm"
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-5 h-5" style={{ color: social.color }} />
                 </a>
               ))}
             </div>

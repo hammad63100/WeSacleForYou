@@ -107,8 +107,8 @@ const ServiceDetails = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full transform rotate-12 scale-75 opacity-50"></div>
               <img 
-                src="https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&auto=format&fit=crop&w=764&q=80" 
-                alt="Service Representation" 
+                src={service.image} 
+                alt={service.title} 
                 className="relative z-10 rounded-2xl shadow-2xl border border-border/50 w-full object-cover h-[400px]"
               />
             </div>

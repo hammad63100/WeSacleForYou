@@ -19,7 +19,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48"
     >
       {/* 3D Animated Background */}
       <Suspense fallback={null}>
@@ -39,7 +39,7 @@ export const Hero = () => {
       <div ref={ref} className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-0">
           {/* Left Side - Text Content */}
-          <div className="lg:w-1/2 text-center lg:text-left lg:pr-8">
+          <div className="lg:w-[45%] text-center lg:text-left">
             {/* Badge */}
             <div
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 transition-all duration-700 ${
@@ -114,14 +114,15 @@ export const Hero = () => {
 
           {/* Right Side - Amazon Image */}
           <div
-            className={`lg:w-1/2 flex justify-center lg:justify-end items-center transition-all duration-700 delay-500 ${
+            className={`lg:w-[55%] flex justify-center lg:justify-end items-center transition-all duration-700 delay-500 ${
               isVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
             }`}
           >
             <img
               src={amazonImage}
               alt="Amazon Business Growth"
-              className="w-full max-w-full h-auto max-h-[80vh] object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+              className="w-full max-w-[800px] h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+              style={{ mixBlendMode: 'multiply', background: 'transparent' }}
             />
           </div>
         </div>

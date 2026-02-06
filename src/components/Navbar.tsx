@@ -39,7 +39,7 @@ export const Navbar = () => {
   return (
     <>
       {/* Top Green Banner */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground py-2 px-4">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground py-3 px-4">
         <div className="container mx-auto flex items-center justify-between text-sm font-medium">
           <span>WANT A FREE AMAZON PPC AUDIT ?</span>
           <div className="flex items-center gap-4">
@@ -51,28 +51,28 @@ export const Navbar = () => {
                 href="https://www.instagram.com/wescaleforyou?igsh=bWt5NTF0azVuY2F1" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
+                className="bg-white rounded-full p-1.5 hover:scale-110 transition-transform flex items-center justify-center group"
                 aria-label="Instagram"
               >
-                <Instagram className="h-4 w-4" />
+                <Instagram className="h-4 w-4 text-[#E4405F]" />
               </a>
               <a 
                 href="https://www.facebook.com/profile.php?id=100003372257229" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
+                className="bg-white rounded-full p-1.5 hover:scale-110 transition-transform flex items-center justify-center group"
                 aria-label="Facebook"
               >
-                <Facebook className="h-4 w-4" />
+                <Facebook className="h-4 w-4 text-[#1877F2]" />
               </a>
               <a 
                 href="https://www.linkedin.com/in/ihtisham-khan-8204412b0/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
+                className="bg-white rounded-full p-1.5 hover:scale-110 transition-transform flex items-center justify-center group"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="h-4 w-4" />
+                <Linkedin className="h-4 w-4 text-[#0A66C2]" />
               </a>
             </div>
           </div>
