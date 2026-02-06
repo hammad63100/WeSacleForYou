@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useEffect } from 'react';
 import { PulsatingButton } from '@/components/ui/pulsating-button';
+import { Navbar } from '@/components/Navbar';
 
 const ServiceDetails = () => {
   const { slug } = useParams();
@@ -76,6 +77,9 @@ const ServiceDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Navbar */}
+      <Navbar />
+
       {/* Hero Section */}
       <section className="relative pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 overflow-hidden bg-gradient-to-br from-primary/10 via-background to-background">
         <div className="container mx-auto px-4">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Instagram, Facebook, Linkedin, ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { PulsatingButton } from '@/components/ui/pulsating-button';
 import { ThemeToggle } from './ThemeToggle';
@@ -32,6 +32,8 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +44,15 @@ export const Navbar = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
+    // If we're not on the homepage, navigate to homepage first
+    if (location.pathname !== '/') {
+      navigate('/' + href);
+      setIsMobileMenuOpen(false);
+      setIsMobileServicesOpen(false);
+      return;
+    }
+
+    // If on homepage, scroll to section
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -53,7 +64,7 @@ export const Navbar = () => {
   return (
     <>
       {/* Top Green Banner */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground py-1.5 px-4">
+      <div className="absolute top-0 left-0 right-0 z-50 bg-primary text-primary-foreground py-1.5 px-4">
         <div className="container mx-auto flex items-center justify-between text-xs sm:text-sm font-medium">
           <span className="truncate">WANT A FREE AMAZON PPC AUDIT ?</span>
           <div className="flex items-center gap-2 sm:gap-4">
@@ -96,10 +107,10 @@ export const Navbar = () => {
       {/* Main Header - adjusted for top banner */}
       <header
         className={cn(
-          'fixed top-[32px] left-0 right-0 z-40 transition-all duration-300',
+          'absolute top-[32px] left-0 right-0 z-40 transition-all duration-300 bg-background/95 backdrop-blur-md border-b border-border/50',
           isScrolled
-            ? 'bg-transparent backdrop-blur-sm'
-            : 'bg-transparent'
+            ? 'shadow-md'
+            : ''
         )}
       >
         <nav className="container mx-auto px-4 py-1">

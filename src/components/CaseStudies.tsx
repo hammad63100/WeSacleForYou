@@ -1,63 +1,19 @@
-import { ArrowUpRight, TrendingUp, DollarSign, ShoppingCart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-
-const caseStudies = [
-  {
-    title: 'Health & Wellness Brand',
-    category: 'PPC & SEO',
-    image: '/placeholder.svg',
-    stats: [
-      { label: 'Revenue Increase', value: '156%', icon: DollarSign },
-      { label: 'ACOS Reduction', value: '42%', icon: TrendingUp },
-    ],
-    description:
-      'Transformed a struggling supplement brand into a category leader through strategic PPC optimization and listing enhancement.',
-  },
-  {
-    title: 'Home & Kitchen',
-    category: 'Brand Launch',
-    image: '/placeholder.svg',
-    stats: [
-      { label: 'Monthly Revenue', value: '$150K', icon: DollarSign },
-      { label: 'Ranking Improvement', value: 'Top 10', icon: TrendingUp },
-    ],
-    description:
-      'Launched a new kitchenware brand from zero to six-figure monthly revenue within 8 months.',
-  },
-  {
-    title: 'Beauty & Personal Care',
-    category: 'Full Service',
-    image: '/placeholder.svg',
-    stats: [
-      { label: 'Conversion Rate', value: '+85%', icon: ShoppingCart },
-      { label: 'Organic Traffic', value: '3x', icon: TrendingUp },
-    ],
-    description:
-      'Complete brand overhaul including A+ Content, photography, and PPC management for a premium skincare line.',
-  },
-  {
-    title: 'Electronics & Accessories',
-    category: 'DSP & PPC',
-    image: '/placeholder.svg',
-    stats: [
-      { label: 'ROAS', value: '4.2x', icon: DollarSign },
-      { label: 'Brand Awareness', value: '+200%', icon: TrendingUp },
-    ],
-    description:
-      'Implemented advanced DSP campaigns alongside PPC to dominate the portable electronics category.',
-  },
-];
+import { caseStudies } from '@/data/caseStudies';
 
 export const CaseStudies = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const navigate = useNavigate();
 
   return (
-    <section id="case-studies" className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
+    <section id="case-studies" className="py-12 sm:py-16 lg:py-24 relative overflow-hidden bg-muted/20">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
 
       <div ref={ref} className="container mx-auto px-4 relative z-10">
         {/* Header */}
@@ -87,28 +43,18 @@ export const CaseStudies = () => {
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {caseStudies.map((study, index) => (
-            <CaseStudyCard
+            <div
               key={index}
-              {...study}
-              index={index}
-              isVisible={isVisible}
-            />
+              onClick={() => navigate(`/case-study/${study.id}`)}
+              className="cursor-pointer outline-none block"
+            >
+              <CaseStudyCard
+                {...study}
+                index={index}
+                isVisible={isVisible}
+              />
+            </div>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div
-          className={`text-center mt-12 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-        >
-          <Button
-            size="lg"
-            variant="outline"
-            className="group border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-          >
-            View All Case Studies
-            <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Button>
         </div>
       </div>
     </section>
@@ -117,63 +63,58 @@ export const CaseStudies = () => {
 
 const CaseStudyCard = ({
   title,
+  subtitle,
   category,
   image,
-  stats,
-  description,
+  mainStat,
   index,
   isVisible,
 }: {
   title: string;
+  subtitle: string;
   category: string;
   image: string;
-  stats: { label: string; value: string; icon: React.ComponentType<{ className?: string }> }[];
-  description: string;
+  mainStat: { value: string; label: string };
   index: number;
   isVisible: boolean;
 }) => {
   return (
     <Card
-      className={`group overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      className={`group overflow-hidden border-transparent hover:border-primary/20 bg-card shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 aspect-square flex flex-col ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      {/* Image */}
-      <div className="relative h-48 bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
+      {/* Image - Top Section */}
+      <div className="relative h-[75%] overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-        <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+        <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wide border-none px-2.5 py-1">
           {category}
         </Badge>
       </div>
 
-      <CardContent className="p-6">
-        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-          {title}
-        </h3>
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-          {description}
-        </p>
+      {/* Content - Bottom Section (Split) */}
+      <CardContent className="h-[28%] p-3 grid grid-cols-12 gap-2.5 items-center bg-card relative">
+        <div className="col-span-7 flex flex-col justify-center border-r border-border/40 pr-3">
+          <h3 className="text-lg font-bold text-primary mb-1 line-clamp-1">{title}</h3>
+          <p className="text-sm text-foreground/80 font-medium mb-2 line-clamp-1 leading-tight">
+            {subtitle}
+          </p>
+          <Button className="w-fit mt-auto text-base px-5 py-2.5 h-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-md group-hover:shadow-lg transition-all pointer-events-none">
+            Read Case Study
+          </Button>
+        </div>
 
-        {/* Stats */}
-        <div className="flex gap-4">
-          {stats.map((stat, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <stat.icon className="w-4 h-4 text-primary" />
-              </div>
-              <div>
-                <div className="text-lg font-bold text-primary">{stat.value}</div>
-                <div className="text-xs text-muted-foreground">{stat.label}</div>
-              </div>
-            </div>
-          ))}
+        <div className="col-span-5 flex flex-col items-center justify-center text-center pl-2">
+          <span className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight leading-none">{mainStat.value}</span>
+          <span className="text-sm text-muted-foreground mt-1 font-medium bg-muted/50 px-2.5 py-1 rounded-md">{mainStat.label}</span>
         </div>
       </CardContent>
     </Card>
   );
 };
+

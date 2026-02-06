@@ -10,6 +10,8 @@ import ServiceDetails from "./pages/ServiceDetails";
 
 const queryClient = new QueryClient();
 
+import CaseStudyPage from "./pages/CaseStudyPage";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -20,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/service/:slug" element={<ServiceDetails />} />
+            <Route path="/case-study/:id" element={<CaseStudyPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

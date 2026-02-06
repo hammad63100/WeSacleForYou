@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useRef } from 'react';
+import { Star, Quote } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { motion } from 'framer-motion';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const testimonials = [
@@ -48,20 +48,6 @@ const testimonials = [
     text: "We were struggling with our PPC campaigns for over a year. WeScaleForYou took over and within 60 days, our ROAS improved from 1.5x to 4.2x. Their weekly reporting and transparent communication made us feel confident in every decision. Highly recommend their Amazon PPC Management!",
   },
   {
-    name: 'Michael Brown',
-    role: 'Founder, FitGear Athletics',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
-    rating: 5,
-    text: "The A-Z Brand Launch service is incredible. They handled everything from market research to listing creation, photography guidelines, and PPC setup. We launched our brand from scratch and reached $30K in monthly sales within our first quarter. Best investment we ever made!",
-  },
-  {
-    name: 'Amanda White',
-    role: 'Owner, GreenHome Products',
-    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face',
-    rating: 5,
-    text: "Their listing optimization and A+ Content design are world-class. After they optimized our main product listings, our click-through rate increased by 65% and conversion rate doubled. The team really understands what makes customers click 'Add to Cart'. Professional and results-driven!",
-  },
-  {
     name: 'Christopher Anderson',
     role: 'Director, PetCare Essentials',
     image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
@@ -72,37 +58,15 @@ const testimonials = [
 
 export const Testimonials = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  const goToPrevious = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
 
   return (
     <section
       id="testimonials"
-      className="py-12 sm:py-16 lg:py-24 bg-muted/30"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      className="py-12 sm:py-16 lg:py-24 bg-muted/30 overflow-hidden"
     >
-      <div ref={ref} className="container mx-auto px-4">
+      <div ref={ref} className="container mx-auto px-4 mb-16">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto">
           <span
             className={`inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
@@ -123,90 +87,71 @@ export const Testimonials = () => {
             scale on Amazon.
           </p>
         </div>
+      </div>
 
-        {/* Testimonial Carousel */}
-        <div
-          className={`relative max-w-4xl mx-auto transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-        >
-          {/* Main Card */}
-          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-            <CardContent className="p-8 md:p-12">
-              <div className="flex flex-col items-center text-center">
-                {/* Quote Icon */}
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-                  <Quote className="w-8 h-8 text-primary" />
-                </div>
+      {/* Marquee Container */}
+      <div className={`relative w-full transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        {/* Gradient Masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-muted/30 via-muted/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-muted/30 via-muted/30 to-transparent z-10 pointer-events-none" />
 
-                {/* Rating */}
-                <div className="flex gap-1 mb-6">
-                  {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 text-primary fill-primary"
-                    />
-                  ))}
-                </div>
-
-                {/* Text */}
-                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8 max-w-2xl">
-                  "{testimonials[currentIndex].text}"
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <img
-                    src={testimonials[currentIndex].image}
-                    alt={testimonials[currentIndex].name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-primary/20"
-                  />
-                  <div className="text-left">
-                    <div className="font-semibold text-foreground">
-                      {testimonials[currentIndex].name}
+        <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <motion.div
+            className="flex gap-6 px-6"
+            animate={{ x: "-50%" }}
+            transition={{
+              duration: 50,
+              ease: "linear",
+              repeat: Infinity,
+            }}
+          >
+            {/* Double the testimonials for seamless loop */}
+            {[...testimonials, ...testimonials].map((testimonial, index) => (
+              <Card
+                key={index}
+                className="w-[350px] aspect-square flex-shrink-0 border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-colors duration-300"
+              >
+                <CardContent className="p-6 h-full flex flex-col items-center text-center justify-between">
+                  {/* Top: Quote & Rating */}
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Quote className="w-5 h-5 text-primary" />
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonials[currentIndex].role}
+                    <div className="flex gap-0.5">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 text-primary fill-primary"
+                        />
+                      ))}
                     </div>
                   </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToPrevious}
-              className="rounded-full border-border hover:bg-primary hover:text-primary-foreground hover:border-primary"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
+                  {/* Middle: Text */}
+                  <p className="text-muted-foreground text-sm leading-relaxed line-clamp-6">
+                    "{testimonial.text}"
+                  </p>
 
-            {/* Dots */}
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${index === currentIndex
-                    ? 'bg-primary w-8'
-                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                    }`}
-                />
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToNext}
-              className="rounded-full border-border hover:bg-primary hover:text-primary-foreground hover:border-primary"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
-          </div>
+                  {/* Bottom: Author */}
+                  <div className="flex items-center gap-3 w-full justify-center pt-2 border-t border-border/30 mt-2">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-10 h-10 rounded-full object-cover border border-primary/20"
+                    />
+                    <div className="text-left">
+                      <div className="font-semibold text-sm text-foreground">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {testimonial.role}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

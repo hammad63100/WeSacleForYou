@@ -70,7 +70,7 @@ export const services: Service[] = [
   },
   {
     icon: Package,
-    title: 'Products Sourcing',
+    title: 'Product Sourcing',
     description:
       'We help you find reliable suppliers, negotiate pricing, and ensure product quality, so you can source profitable products with confidence and reduced risk.',
     image: productSourcingImage,
