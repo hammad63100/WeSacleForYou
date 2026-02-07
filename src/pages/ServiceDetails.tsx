@@ -81,21 +81,21 @@ const ServiceDetails = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 overflow-hidden bg-gradient-to-br from-primary/10 via-background to-background">
+      <section className="relative pt-28 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-20 overflow-hidden bg-gradient-to-br from-primary/10 via-background to-background">
         <div className="container mx-auto px-4">
-          <Link to="/#services" className="inline-flex items-center text-primary hover:underline mb-8 font-medium">
+          <Link to="/#services" className="inline-flex items-center text-primary hover:underline mb-6 sm:mb-8 font-medium text-sm sm:text-base">
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Services
           </Link>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                <Icon className="w-4 h-4" />
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-medium text-xs sm:text-sm">
+                <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span>Professional Service</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 {service.title} <span className="text-primary">Services</span>
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+              <p className="text-base sm:text-xl text-muted-foreground leading-relaxed max-w-lg">
                 {service.description}
               </p>
               <div className="flex flex-wrap gap-4 pt-4">

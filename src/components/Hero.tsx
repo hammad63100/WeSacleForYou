@@ -19,7 +19,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-40 lg:pt-48"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-28 lg:pt-32"
     >
       {/* 3D Animated Background */}
       <Suspense fallback={null}>
@@ -39,10 +39,10 @@ export const Hero = () => {
       <div ref={ref} className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-0">
           {/* Left Side - Text Content */}
-          <div className="lg:w-[45%] text-center lg:text-left">
+          <div className="lg:w-[50%] text-center lg:text-left mt-4 sm:mt-6 lg:mt-8">
             {/* Badge */}
             <div
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
             >
               <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
@@ -110,13 +110,13 @@ export const Hero = () => {
 
           {/* Right Side - Amazon Image */}
           <div
-            className={`hidden sm:flex lg:w-[55%] justify-center lg:justify-end items-center transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
+            className={`hidden sm:flex lg:w-[50%] justify-center lg:justify-start items-center -ml-0 lg:-ml-8 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
               }`}
           >
             <img
               src={amazonImage}
               alt="Amazon Business Growth"
-              className="w-full max-w-[400px] lg:max-w-[800px] h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+              className="w-full max-w-[300px] lg:max-w-[600px] h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               style={{ mixBlendMode: 'multiply', background: 'transparent' }}
             />
           </div>

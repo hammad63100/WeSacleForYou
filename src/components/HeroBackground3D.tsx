@@ -35,7 +35,7 @@ const FloatingShape = ({
       // Subtle mouse-follow effect on position
       const mouseX = state.mouse.x * mouseInfluence;
       const mouseY = state.mouse.y * mouseInfluence;
-      
+
       meshRef.current.position.x = THREE.MathUtils.lerp(
         meshRef.current.position.x,
         initialPosition.current[0] + mouseX,
@@ -52,19 +52,19 @@ const FloatingShape = ({
   const GeometryComponent = useMemo(() => {
     switch (geometry) {
       case 'sphere':
-        return <sphereGeometry args={[1, 64, 64]} />;
+        return <sphereGeometry args={[1, 32, 32]} />;
       case 'octahedron':
         return <octahedronGeometry args={[1, 0]} />;
       case 'icosahedron':
         return <icosahedronGeometry args={[1, 0]} />;
       case 'torus':
-        return <torusGeometry args={[1, 0.4, 32, 64]} />;
+        return <torusGeometry args={[1, 0.4, 16, 32]} />;
       case 'box':
         return <boxGeometry args={[1.2, 1.2, 1.2]} />;
       case 'cone':
-        return <coneGeometry args={[0.8, 1.5, 32]} />;
+        return <coneGeometry args={[0.8, 1.5, 16]} />;
       default:
-        return <sphereGeometry args={[1, 64, 64]} />;
+        return <sphereGeometry args={[1, 32, 32]} />;
     }
   }, [geometry]);
 
@@ -87,7 +87,7 @@ const FloatingShape = ({
 
 const ParticleField = () => {
   const particlesRef = useRef<THREE.Points>(null);
-  const particleCount = 80;
+  const particleCount = 40; // Reduced from 80
 
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
@@ -103,7 +103,7 @@ const ParticleField = () => {
     if (particlesRef.current) {
       particlesRef.current.rotation.y = state.clock.elapsedTime * 0.015;
       particlesRef.current.rotation.x = state.clock.elapsedTime * 0.008;
-      
+
       // Subtle mouse influence on particles
       particlesRef.current.rotation.z = state.mouse.x * 0.05;
     }
@@ -132,14 +132,14 @@ const ParticleField = () => {
 
 const CameraController = () => {
   const { camera } = useThree();
-  
+
   useFrame((state) => {
     // Subtle camera movement based on mouse
     camera.position.x = THREE.MathUtils.lerp(camera.position.x, state.mouse.x * 0.5, 0.02);
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, state.mouse.y * 0.3, 0.02);
     camera.lookAt(0, 0, 0);
   });
-  
+
   return null;
 };
 
@@ -152,7 +152,7 @@ const Scene = () => {
       <directionalLight position={[-10, -5, 5]} intensity={0.4} color="#10b981" />
       <pointLight position={[0, 0, 10]} intensity={0.3} color="#ffffff" />
 
-      {/* Clean floating shapes with mouse influence */}
+      {/* Reduced number of floating shapes for performance */}
       <FloatingShape
         position={[-5, 2.5, -4]}
         color="#10b981"
@@ -185,38 +185,6 @@ const Scene = () => {
         geometry="torus"
         mouseInfluence={0.7}
       />
-      <FloatingShape
-        position={[0, -3.5, -4]}
-        color="#047857"
-        speed={0.6}
-        scale={0.6}
-        geometry="cone"
-        mouseInfluence={0.5}
-      />
-      <FloatingShape
-        position={[-6, 0, -7]}
-        color="#059669"
-        speed={1.3}
-        scale={0.9}
-        geometry="icosahedron"
-        mouseInfluence={0.3}
-      />
-      <FloatingShape
-        position={[6, 1.5, -5]}
-        color="#34d399"
-        speed={0.9}
-        scale={0.5}
-        geometry="box"
-        mouseInfluence={0.9}
-      />
-      <FloatingShape
-        position={[2, 4, -8]}
-        color="#10b981"
-        speed={0.7}
-        scale={0.6}
-        geometry="sphere"
-        mouseInfluence={0.4}
-      />
 
       {/* Particle field */}
       <ParticleField />
@@ -225,12 +193,30 @@ const Scene = () => {
 };
 
 export const HeroBackground3D = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Don't render 3D on mobile for better performance
+  if (isMobile) {
+    return (
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+    );
+  }
+
   return (
     <div className="absolute inset-0 opacity-80">
       <Canvas
         camera={{ position: [0, 0, 10], fov: 50 }}
-        dpr={[2, 2]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]} // Reduced from [2, 2] for better performance
+        gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
       >
         <Scene />

@@ -31,16 +31,16 @@ const CaseStudyPage = () => {
             <Navbar />
 
             {/* Hero Section - Green Gradient Background */}
-            <div className="bg-gradient-to-b from-green-800 via-green-600 to-green-200 pt-48 pb-16 sm:pb-24">
+            <div className="bg-gradient-to-b from-green-800 via-green-200 to-green-100 pt-32 sm:pt-40 lg:pt-48 pb-12 sm:pb-16 lg:pb-24">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         {/* Left Side - Stats */}
-                        <div className="space-y-6">
+                        <div className="space-y-4 sm:space-y-6">
                             <div>
-                                <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">
+                                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                                     Case Study:
                                 </h1>
-                                <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+                                <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
                                     {study.title}
                                 </h2>
                             </div>
@@ -99,7 +99,7 @@ const CaseStudyPage = () => {
 
                         {/* Right Side - Images */}
                         <div className="flex items-center justify-center w-full">
-                            <div className="relative w-full max-w-sm">
+                            <div className="relative w-full max-w-lg">
                                 <div className="absolute inset-0 bg-white/20 rounded-3xl blur-2xl"></div>
                                 {study.images && study.images.length > 1 ? (
                                     <div className="grid grid-cols-1 gap-4">

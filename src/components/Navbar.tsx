@@ -44,9 +44,16 @@ export const Navbar = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
-    // If we're not on the homepage, navigate to homepage first
+    // If we're not on the homepage, navigate to homepage first then scroll
     if (location.pathname !== '/') {
-      navigate('/' + href);
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
       setIsMobileMenuOpen(false);
       setIsMobileServicesOpen(false);
       return;
@@ -107,17 +114,17 @@ export const Navbar = () => {
       {/* Main Header - adjusted for top banner */}
       <header
         className={cn(
-          'absolute top-[32px] left-0 right-0 z-40 transition-all duration-300 bg-background/95 backdrop-blur-md border-b border-border/50',
+          'absolute top-[32px] left-0 right-0 z-40 transition-all duration-300',
           isScrolled
-            ? 'shadow-md'
-            : ''
+            ? 'bg-background/95 backdrop-blur-md border-b border-border/50 shadow-md'
+            : 'bg-transparent'
         )}
       >
-        <nav className="container mx-auto px-4 py-1">
+        <nav className="container mx-auto px-4 py-0">
           <div className="flex items-center justify-between">
             {/* Animated 3D Logo - Separate container for size control */}
             <div className="flex-shrink-0">
-              <AnimatedLogo onClick={() => scrollToSection('#home')} className="scale-100 sm:scale-125 lg:scale-150" />
+              <AnimatedLogo onClick={() => scrollToSection('#home')} />
             </div>
 
             {/* Desktop Navigation */}
