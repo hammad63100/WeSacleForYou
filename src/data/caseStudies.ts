@@ -3,6 +3,7 @@ import caseStudy1 from '@/assets/casestudy1.jpg';
 import caseStudy2 from '@/assets/CaseStudy2.jpg';
 import caseStudy3 from '@/assets/casestudy3.jpg';
 import caseStudy4 from '@/assets/casestudy4.jpg';
+import caseStudy4_1 from '@/assets/casestudy4.1.jpg';
 
 export const caseStudies = [
     {
@@ -201,6 +202,7 @@ export const caseStudies = [
         subtitle: 'Electronics Category Transformation',
         category: 'Electronics',
         image: caseStudy4,
+        images: [caseStudy4, caseStudy4_1],
         mainStat: { value: '11.6%', label: 'TACOS' },
         stats: [
             { label: 'Sales', value: '$1,139,000', icon: DollarSign },

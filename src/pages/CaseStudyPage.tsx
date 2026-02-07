@@ -30,10 +30,8 @@ const CaseStudyPage = () => {
             {/* Navbar */}
             <Navbar />
 
-
-
-            {/* Hero Section - Blue/Cyan Background */}
-            <div className="bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-500 py-16 sm:py-24">
+            {/* Hero Section - Green Gradient Background */}
+            <div className="bg-gradient-to-b from-green-800 via-green-600 to-green-200 pt-48 pb-16 sm:pb-24">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         {/* Left Side - Stats */}
@@ -99,15 +97,28 @@ const CaseStudyPage = () => {
                             </div>
                         </div>
 
-                        {/* Right Side - Image */}
-                        <div className="flex items-center justify-center">
-                            <div className="relative">
+                        {/* Right Side - Images */}
+                        <div className="flex items-center justify-center w-full">
+                            <div className="relative w-full max-w-lg">
                                 <div className="absolute inset-0 bg-white/20 rounded-3xl blur-2xl"></div>
-                                <img
-                                    src={study.image}
-                                    alt={study.title}
-                                    className="relative rounded-2xl shadow-2xl border-8 border-white/30 max-w-full h-auto"
-                                />
+                                {study.images && study.images.length > 1 ? (
+                                    <div className="grid grid-cols-1 gap-4">
+                                        {study.images.map((img: string, index: number) => (
+                                            <img
+                                                key={index}
+                                                src={img}
+                                                alt={`${study.title} ${index + 1}`}
+                                                className="relative rounded-2xl shadow-2xl border-4 border-white/30 w-full h-auto"
+                                            />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <img
+                                        src={study.image}
+                                        alt={study.title}
+                                        className="relative rounded-2xl shadow-2xl border-8 border-white/30 w-full h-auto"
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>
