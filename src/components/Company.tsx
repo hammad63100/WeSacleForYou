@@ -1,5 +1,5 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import aboutBg from '../assets/about.HEIC';
+import aboutBg from '../assets/about.png';
 
 export const Company = () => {
   const { ref, isVisible } = useScrollAnimation();
