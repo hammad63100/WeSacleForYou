@@ -145,36 +145,34 @@ const OfferingCard = ({
 }) => {
   return (
     <div
-      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
-        } gap-6 lg:gap-8 items-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      className={`group flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        } items-stretch rounded-3xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/50 overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Visual Side */}
-      <div className={`w-full lg:w-1/2 flex justify-center ${isReversed ? 'lg:justify-start' : 'lg:justify-end'}`}>
-        <div className="relative w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-          {image ? (
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-auto object-contain transform group-hover:scale-105 transition-transform duration-700"
-            />
-          ) : (
-            <div className="w-full h-full bg-muted flex items-center justify-center">
-              <Icon className="w-24 h-24 text-muted-foreground/50" />
-            </div>
-          )}
-        </div>
+      <div className="w-full lg:w-1/2 relative bg-primary/5 min-h-[300px] lg:min-h-full flex items-center justify-center p-6 lg:p-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {image ? (
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-auto max-h-[350px] object-contain transform group-hover:scale-105 transition-transform duration-700 relative z-10 drop-shadow-xl"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <Icon className="w-24 h-24 text-primary/20" />
+          </div>
+        )}
       </div>
 
       {/* Content Side */}
-      <div className="w-full lg:w-1/2">
+      <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
             <Icon className="w-6 h-6" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-bold">{title}</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold leading-tight">{title}</h3>
         </div>
 
         <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
@@ -183,8 +181,8 @@ const OfferingCard = ({
 
         <ul className="space-y-4">
           {features.map((feature, i) => (
-            <li key={i} className="flex items-start gap-4 group">
-              <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mt-0.5 group-hover:bg-primary transition-colors duration-300">
+            <li key={i} className="flex items-start gap-4">
+              <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mt-0.5 shrink-0 group-hover:bg-primary transition-colors duration-300">
                 <div className="w-2 h-2 rounded-full bg-primary group-hover:bg-white transition-colors duration-300" />
               </div>
               <span className="text-foreground font-medium">{feature}</span>
