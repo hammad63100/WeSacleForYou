@@ -129,9 +129,17 @@ const FeatureCard = ({
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <div className="flex items-start gap-4">
-        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-          <Icon className="w-6 h-6 text-primary" />
+        {/* Icon Container with Rotating Ring */}
+        <div className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
+          {/* Rotating dashed ring */}
+          <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/30 group-hover:border-primary animate-[spin_12s_linear_infinite_reverse]" />
+
+          {/* Inner circle */}
+          <div className="relative w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors z-10">
+            <Icon className="w-6 h-6 text-primary" />
+          </div>
         </div>
+
         <div>
           <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
             {title}
@@ -162,17 +170,37 @@ const StatItem = ({
 
   return (
     <div
-      className={`flex flex-col items-center transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      className={`flex flex-col items-center group transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-primary/30 bg-card/30 backdrop-blur-sm flex items-center justify-center mb-3 hover:border-primary/60 hover:bg-card/50 transition-all duration-300 hover:scale-105">
-        <span className="text-2xl sm:text-3xl font-bold text-primary">
-          {count}
-          {suffix}
-        </span>
+      <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mb-6">
+        {/* Outer glowing ring */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 via-primary/5 to-accent/20 animate-[spin_8s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl" />
+
+        {/* Rotating border ring */}
+        <div className="absolute inset-0 rounded-full border border-primary/20 group-hover:border-primary/40 transition-colors duration-500" />
+
+        {/* Animated dashes ring */}
+        <div className="absolute inset-2 rounded-full border-4 border-dashed border-primary animate-[spin_12s_linear_infinite_reverse]" />
+
+        {/* Inner circle container */}
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-card shadow-lg flex items-center justify-center border border-border/50 group-hover:border-primary/50 group-hover:shadow-primary/20 transition-all duration-500 z-10">
+          <div className="absolute inset-0 rounded-full bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <span className="relative text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-primary to-primary/70 group-hover:scale-110 transition-transform duration-500">
+            {count}
+            {suffix}
+          </span>
+        </div>
       </div>
-      <div className="text-sm text-muted-foreground text-center">{label}</div>
+
+      {/* Label with underline effect */}
+      <div className="relative">
+        <div className="text-base sm:text-lg font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300 text-center">
+          {label}
+        </div>
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-500 group-hover:w-full opacity-0 group-hover:opacity-100" />
+      </div>
     </div>
   );
 };

@@ -8,9 +8,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 export const Services = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
 
-  // Split services: first 3 for row 1, remaining 4 for row 2
-  const firstRowServices = services.slice(0, 3);
-  const secondRowServices = services.slice(3, 7);
+
 
   // Removed badges array
 
@@ -43,14 +41,14 @@ export const Services = () => {
 
         {/* First Row - 3 Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-          {firstRowServices.map((service, index) => {
+          {services.slice(0, 3).map((service, index) => {
             const slug = service.title
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/(^-|-$)+/g, '');
 
             return (
-              <Link key={index} to={`/service/${slug}`} className="block h-full">
+              <Link key={index} to={`/service/${slug}`} className="block h-full transition-transform hover:-translate-y-1 duration-300">
                 <ServiceCard
                   {...service}
                   index={index}
@@ -63,14 +61,14 @@ export const Services = () => {
 
         {/* Second Row - 4 Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {secondRowServices.map((service, index) => {
+          {services.slice(3, 7).map((service, index) => {
             const slug = service.title
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/(^-|-$)+/g, '');
 
             return (
-              <Link key={index + 3} to={`/service/${slug}`} className="block h-full">
+              <Link key={index + 3} to={`/service/${slug}`} className="block h-full transition-transform hover:-translate-y-1 duration-300">
                 <ServiceCard
                   {...service}
                   index={index + 3}
@@ -100,14 +98,14 @@ const ServiceCard = ({
 }) => {
   return (
     <div
-      className={`group overflow-hidden rounded-xl border border-border/50 bg-card ${isVisible
+      className={`group overflow-hidden rounded-xl border border-border/50 bg-card h-full flex flex-col ${isVisible
         ? 'opacity-100 translate-y-0'
         : 'opacity-0 translate-y-8'
         }`}
       style={{ transitionDelay: `${index * 50}ms`, transition: 'opacity 0.5s, transform 0.5s' }}
     >
       {/* Image at top */}
-      <div className="h-48 overflow-hidden">
+      <div className="h-48 overflow-hidden shrink-0">
         <img
           src={image}
           alt={title}
@@ -116,11 +114,11 @@ const ServiceCard = ({
       </div>
 
       {/* Title and Description below image */}
-      <div className="p-4 text-center">
+      <div className="p-4 text-center flex flex-col flex-grow">
         <h3 className="text-lg font-bold text-foreground mb-2">
           {title}
         </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
           {description}
         </p>
       </div>

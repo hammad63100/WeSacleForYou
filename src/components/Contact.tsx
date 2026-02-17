@@ -34,9 +34,9 @@ const contactInfo = [
   },
   {
     icon: Phone,
-    label: 'Phone',
+    label: 'Phone / WhatsApp',
     value: '+1 (314) 789-6911',
-    href: 'tel:+13147896911',
+    href: 'https://wa.me/13147896911',
   },
   {
     icon: MapPin,
@@ -152,6 +152,8 @@ export const Contact = () => {
                       {info.href ? (
                         <a
                           href={info.href}
+                          target={info.href.startsWith('http') ? '_blank' : undefined}
+                          rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                           className="font-medium hover:text-primary transition-colors"
                         >
                           {info.value}
